@@ -264,6 +264,22 @@ public class HitungDiskonFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int nilai = sldDiskon.getValue();
         lblSliderValue.setText("Diskon: " + nilai + "%");
+
+        // Sinkronisasi dengan ComboBox
+        boolean matched = false;
+        for (int i = 0; i < cmbDiskon.getItemCount(); i++) {
+            String item = cmbDiskon.getItemAt(i);
+            if (!item.equals("Custom") && item.replace("%", "").equals(String.valueOf(nilai))) {
+                cmbDiskon.setSelectedIndex(i);
+                matched = true;
+                break;
+            }
+        }
+
+        // Kalau tidak cocok dengan item apa pun, ubah ComboBox jadi "Custom"
+        if (!matched) {
+            cmbDiskon.setSelectedItem("Custom");
+        }
     }//GEN-LAST:event_sldDiskonStateChanged
 
     /**
